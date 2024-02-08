@@ -179,4 +179,11 @@ public class MusicOrganizer
             }
         }
     }
+    
+    public void resetAllPlayCounts()
+    {
+        for(Track track : tracks) {
+            track.resetPlayCount();
+        }
+    }
 }
