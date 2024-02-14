@@ -2,7 +2,7 @@
  * Store the details of a music track,
  * such as the artist, title, and file name.
  * 
- * @author David J. Barnes and Michael KÃ¶lling
+ * @author David J. Barnes and Michael Kölling
  * @version 2011.07.31
  */
 public class Track
@@ -14,17 +14,18 @@ public class Track
     // Where the track is stored.
     private String filename;
     
-    private int playCount;
+    private String genero;
     
+    private int playCount;
     /**
      * Constructor for objects of class Track.
      * @param artist The track's artist.
      * @param title The track's title.
      * @param filename The track file. 
      */
-    public Track(String artist, String title, String filename)
+    public Track(String artist, String title, String filename, String genero)
     {
-        setDetails(artist, title, filename);
+        setDetails(artist, title, filename, "unknown");
         playCount = 0;
     }
     
@@ -36,7 +37,7 @@ public class Track
      */
     public Track(String filename)
     {
-        setDetails("unknown", "unknown", filename);
+        setDetails("unknown", "unknown", filename, "unknown");
     }
     
     /**
@@ -65,39 +66,50 @@ public class Track
     {
         return filename;
     }
-        
-    /**
-     * Return details of the track: artist, title and file name.
-     * @return The track's details.
-     */
-    public String getDetails()
-    {
-        return artist + ": " + title + "  (file: " + filename + ")"+ " - Play Count: " + playCount;
-    }
-    
-    /**
-     * Set details of the track.
-     * @param artist The track's artist.
-     * @param title The track's title.
-     * @param filename The track file. 
-     */
-    private void setDetails(String artist, String title, String filename)
-    {
-        this.artist = artist;
-        this.title = title;
-        this.filename = filename;
-    }
     
     public int getPlayCount()
     {
         return playCount;
     }
     
+    public String getGenero()
+    {
+        return genero;
+    }
+
+    public void setGenero(String genero)
+    {
+        this.genero = genero;
+    }
+
+    /**
+     * Return details of the track: artist, title and file name.
+     * @return The track's details.
+     */
+    public String getDetails()
+    {
+        return artist + ": " + title + "  (file: " + filename + ")"+" Genero:"+ genero +" - Play Count: " + playCount;
+    }
+
+    /**
+     * Set details of the track.
+     * @param artist The track's artist.
+     * @param title The track's title.
+     * @param filename The track file. 
+     */
+    private void setDetails(String artist, String title, String filename, String genero)
+    {
+        this.artist = artist;
+        this.title = title;
+        this.filename = filename;
+        this.genero = "unknown";
+    }
+    
     public void resetPlayCount()
     {
         playCount = 0;
     }
-
+    
     public void incrementPlayCount()
     {
         playCount++;

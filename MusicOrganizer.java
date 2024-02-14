@@ -1,10 +1,9 @@
 import java.util.ArrayList;
-
 /**
  * A class to hold details of audio tracks.
  * Individual tracks may be played.
  * 
- * @author David J. Barnes and Michael KÃ¶lling
+ * @author David J. Barnes and Michael Kölling
  * @version 2011.07.31
  */
 public class MusicOrganizer
@@ -15,7 +14,6 @@ public class MusicOrganizer
     private MusicPlayer player;
     // A reader that can read music files and load them as tracks.
     private TrackReader reader;
-
     /**
      * Create a MusicOrganizer
      */
@@ -87,7 +85,6 @@ public class MusicOrganizer
     public void listAllTracks()
     {
         System.out.println("Track listing: ");
-
         for(Track track : tracks) {
             System.out.println(track.getDetails());
         }
@@ -122,11 +119,12 @@ public class MusicOrganizer
      * Play the first track in the collection, if there is one.
      */
     public void playFirst()
-    {        
+    {
         int index =0;
         if(tracks.size() > 0) {
             Track track = tracks.get(index);
             track.incrementPlayCount();
+            System.out.println(track.getDetails());
         }
     }
     
@@ -137,7 +135,6 @@ public class MusicOrganizer
     {
         player.stop();
     }
-
     /**
      * Determine whether the given index is valid for the collection.
      * Print an error message if it is not.
@@ -167,7 +164,6 @@ public class MusicOrganizer
     private void readLibrary(String folderName)
     {
         ArrayList<Track> tempTracks = reader.readTracks(folderName, ".mp3");
-
         // Put all thetracks into the organizer.
         for(Track track : tempTracks) {
             addTrack(track);
@@ -183,10 +179,26 @@ public class MusicOrganizer
         }
     }
     
+    public void playCount(){
+        int count = 0;
+        for (Track track : tracks){
+            String title = track.getTitle();
+            count++;
+            System.out.println("La cuenta de las canciones es: "+count);
+        }
+    }
+    
     public void resetAllPlayCounts()
     {
         for(Track track : tracks) {
             track.resetPlayCount();
+        }
+    }
+
+    public void setGenero(int index, String genero) {
+        if(indexValid(index)) {
+            Track track = tracks.get(index);
+            track.setGenero(genero);
         }
     }
 }

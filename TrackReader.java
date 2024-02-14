@@ -2,7 +2,6 @@ import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.util.ArrayList;
-
 /**
  * A helper class for our music application. This class can read files from the file system
  * from a given folder with a specified suffix. It will interpret the file name as artist/
@@ -11,7 +10,7 @@ import java.util.ArrayList;
  * It is expected that file names of music tracks follow a standard format of artist name
  * and track name, separated by a dash. For example: TheBeatles-HereComesTheSun.mp3
  * 
- * @author David J. Barnes and Michael KÃ¶lling
+ * @author David J. Barnes and Michael Kölling
  * @version 2011.03.27
  */
 public class TrackReader
@@ -54,7 +53,6 @@ public class TrackReader
         }
         return tracks;
     }
-
     /**
      * Try to decode details of the artist and the title
      * from the file name.
@@ -69,7 +67,8 @@ public class TrackReader
         String artist = "unknown";
         String title = "unknown";
         String filename = file.getPath();
-        
+        String  genero = "unknown";
+
         // Look for artist and title in the name of the file.
         String details = file.getName();
         String[] parts = details.split("-");
@@ -86,6 +85,6 @@ public class TrackReader
                 title = titlePart;
             }
         }
-        return new Track(artist, title, filename);
+        return new Track(artist, title, filename, genero);
     }
 }
