@@ -14,6 +14,8 @@ public class MusicOrganizer
     private MusicPlayer player;
     // A reader that can read music files and load them as tracks.
     private TrackReader reader;
+    
+    private boolean isPlaying;
     /**
      * Create a MusicOrganizer
      */
@@ -25,6 +27,7 @@ public class MusicOrganizer
         readLibrary("audio");
         System.out.println("Music library loaded. " + getNumberOfTracks() + " tracks.");
         System.out.println();
+        isPlaying = false;
     }
     
     /**
@@ -51,11 +54,17 @@ public class MusicOrganizer
      */
     public void playTrack(int index)
     {
-        if(indexValid(index)) {
-            Track track = tracks.get(index);
-            player.startPlaying(track.getFilename());
-            System.out.println("Now playing: " + track.getArtist() + " - " + track.getTitle());
-            track.incrementPlayCount();
+        if(!isPlaying){
+            if(indexValid(index)) {
+                Track track = tracks.get(index);
+                player.startPlaying(track.getFilename());
+                System.out.println("Now playing: " + track.getArtist() + " - " + track.getTitle());
+                track.incrementPlayCount();
+                isPlaying = true;
+            }
+        }
+        else{
+            System.out.println("Error");
         }
     }
     
@@ -120,11 +129,17 @@ public class MusicOrganizer
      */
     public void playFirst()
     {
-        int index =0;
-        if(tracks.size() > 0) {
-            Track track = tracks.get(index);
-            track.incrementPlayCount();
-            System.out.println(track.getDetails());
+        if(!isPlaying){
+            int index =0;
+            if(tracks.size() > 0) {
+                Track track = tracks.get(index);
+                track.incrementPlayCount();
+                System.out.println(track.getDetails());
+                isPlaying = true;
+            }
+        }
+        else {
+            System.out.println("Error");
         }
     }
     
@@ -134,6 +149,7 @@ public class MusicOrganizer
     public void stopPlaying()
     {
         player.stop();
+        isPlaying = false;
     }
     /**
      * Determine whether the given index is valid for the collection.
